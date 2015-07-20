@@ -1,0 +1,37 @@
+body {
+    min-width:1px !important;
+}
+
+#header img {
+    width: 50%;
+}
+
+#subheader {
+    font-size: 10px;
+    height: 18px;
+    line-height: 19px;
+}
+
+.bullet {
+    background: #222233 !important;
+}
+.bullet.even {
+    background: #111122 !important;
+}
+.bullet.even .bcontent {
+    padding-left: 10px !important;
+}
+.bullet.odd .bcontent {
+    padding-right: 10px !important;
+}
+
+#footer {
+    font-size: 8px;
+}
+
+h2 {
+    font-size: 18px;
+}
+.bcontent {
+    font-size: 14px;
+}
