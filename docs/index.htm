@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<title>GrumpBound - kind-of-not-really-documentation</title>
+<h1>GrumpBound - kind-of-not-really-documentation</h1>
+
+<style>
+    a { color: #0000FF; }
+</style>
+
+<p>This document explains specific technical details of the GrumpBound game engine. It's here so everyone knows how to make their sprites, music and other assets ready for use within the game.</p>
+
+<ul>
+    <li><a href='#game'>The game engine itself</a></li>
+    <li><a href='#graphics'>Graphics/sprites</a></li>
+    <li><a href='#maps'>Maps</a></li>
+    <li><a href='#music'>Music and sound effects</a></li>
+    <li><a href='#scripts'>Scripts</a></li>
+    <li><a href='#viewport'>Viewport</a></li>
+    <li>
+        <a href='#other'>Other details</a>
+        <ul>
+            <li><a href='#battlesprites'>Sprites in battle</a></li>
+            <li><a href='#psi'>PSI animations</a></li>
+            <li><a href='#textcommands'>Text commands</a></li>
+        </ul>
+    </li>
+</ul>
+
+<a name='game'></a>
+<h2>The game engine itself</h2>
+
+<p>Technically, the game is created with Game Maker 7. It's a very outdated piece of software, but I haven't had the time and money to upgrade yet. But sooner or later, the game will be ported to Game Maker: Studio, so it can work on platforms other than Windows. I have no idea if GM was the right choice for this type of game - I just like it because I have the option of writing real code in GML instead of playing with drag-and-drop blocks, like most of the modern game development platforms force me to.</p>
+
+<p>In practice however, programming even a moderately sized project with only the outdated Game Maker engine would be a pain. Biggest parts of the game are handled using external libraries (written in C++ with portability in mind). Most of the in-game actions - dialogs, items, events - are built with a custom script engine. The Game Maker codebase is just the glue that keeps everything together, and I try to avoid hardcoding anything in GML as much as I can.</p>
+
+<p>Below you will find all the details concerning various aspects of the game engine.</p>
+
+<a name='graphics'></a>
+<h2>Graphics/sprites</h2>
+
+<p>The overworld sprites for both playable/non-player characters and enemies should be capable of displaying 8-directional movement. Although I used (awful) 2-frame walk cycles in my first preview video, the game engine has support for 4-frame walk cycles if ever necessary. In game data, the sprites are stored as strips, with every frame showing the sprite facing a different direction: starting at facing right, rotating to the left at 45 degree angles. For human characters, the size of each frame is 38x70. There is no size standard for enemies. 40x40 is the most common, but if you need to make something giant, there's no need to worry.</p>
+
+<p>The pixel color down in the bottom left corner of every frame is the "transparent" color - color keying will be used on it to make the background transparent. Because of that, try to not use generic colors like white or black as frame backgrounds. Transparent PNGs/GIFs are acceptable.</p>
+
+<center>
+<img src='f1.png'><br>
+<i>(the sprite sheet for the swoodest grommet on the internet)</i>
+</center>
+
+<p>The walk cycle animations are created in a similar way - strips with each direction being on a separate frame.</p>
+
+<center>
+<img src='f2.png'><br>
+<i>(my awful walk cycles for Daaaaaaaaan)</i>
+</center>
+
+<p>Having different background colors for each frame isn't a necessity. I just like to do this to separate the frames from each other.</p>
+
+<p>As of now, the sprites for fainted characters are generated dynamically, by just adding some transparency. It looks okay, and it's probably not worth the effort to create separate sprites just for that.</p>
+
+<center>
+<a href='f5.png'><img src='f5.png' style='width:320px'></a><br>
+<i>(Jon got hurt and collapsed - click for the full image)</i>
+</center>
+
+<p>For information regarding the in-battle sprites, go to <a href='#other'>the 'Other' section</a>.</p>
+
+<a name='maps'></a>
+<h2>Maps</h2>
+
+<p>The system for maps is surprisingly simple. The map is just a PNG image of any size. When displayed in-game, the image will be scaled 2 times. Every area should also have a collision mask - this is just yet another PNG image overlayed on the map, representing which of its parts are passable or not. White signifies that the area can be walked on. Any other color will block any characters from passing through. Creating the collision mask is often just a matter of firing up any decent image editor, changing the contrast to maximum and fixing the colors.</p>
+
+<center>
+<img src='f3.png'><br>
+<i>(a small portion of my test map, along with its collision mask)</i>
+</center>
+
+<p>Any special features of the map, like areas passable only from one direction or any things similar to that, will be handled through the game's scripting engine. Collision masks should provide just the basic idea of where the player can walk on.</p>
+
+<p>A crucial part of map design is making sure that the player can't see anything out of bounds. See the <a href='#viewport'>viewport section</a> for more information.</a>
+
+<a name='music'></a>
+<h2>Music and sound effects</h2>
+
+<p>The sound effects are stored as plain, old, uncompressed WAV files. Every sound effect is given an identifier between 1 and 255, for inside use within the game scripts. Because of this, the maximum number of distinct sound effects in the game is 255. I don't think this limit will ever be exhausted. An echo effect can be dynamically applied to any of the sounds, for use in cave areas or any similar environments. The current sound engine supports a maximum of 20 sound effects playing at the same time.</p>
+
+<p>The background music uses a more sophisticated system. All music files are stored in Ogg Vorbis format. They are assigned identifiers between 1 and 255, just like the sound effects. The game scripts have full control over the music's volume, position, pan, pitch, special effects. Only one music track can be playing at any given time.</p>
+
+<p>Because the sounds are loaded dynamically by the game when they are needed, it's important to have a small amount of silence (about 50 ms) at the beginning of each sound effect. On slower computers, the few starting milliseconds can be cut off as the sound is still loading after it already started playing. Music obviously does not have this limitation. With music, especially when creating background music for areas, it's important for the track to create a seamless loop, without any silence at the beginning or end of the file.</p>
+
+<a name='scripts'></a>
+<h2>Scripts</h2>
+
+<p>Unless you're one of the original programmers, you probably won't have to deal with manually scripting anything.</p>
+
+<p>Most of the game logic is handled within a special, custom script engine. It operates on a very simple, low level basis, making it easy to compile it to bytecode. It is similar (and maybe slightly inspired) by the <a href='https://images.google.com/?q=pokemon+scripting'>scripting engine used in the Pokémon games</a>.</p>
+
+<p>Because writing code on an assembly-level language isn't very efficient, I also have a special script compiler, which is just a high-level interface to the low-level scripting language. As a reference, here's the code to display a simple Yes/No dialog after talking to an NPC, written in both the low-level and high-level dialects of the GrumpBound scripting language:</p>
+
+<h3>Low-level version</h3>
+
+<pre>    GrumpBound Script Engine 1.0
+    
+    :EntityAction1
+    ImmediateOn
+    CreateTextStack;Do you like me?
+    WaitTextboxAll
+    SpawnTextboxEx;Yes#No;choice;90;85;10;10;;NULL
+    WaitTextboxAll
+    TextboxResultToMem;0
+    GotoIfEqual;0;0;YesSelected
+    GotoIfEqual;0;1;NoSelected
+    
+    :YesSelected
+    CreateTextStack;Thank you!
+    WaitTextboxAll
+    Exit
+    
+    :NoSelected
+    CreateTextStack;Fuck you.
+    WaitTextboxAll
+    Exit</pre>
+    
+<h3>High-level version</h3>
+    
+<pre>    #ScriptVersion 1.0
+
+    Immediate Function EntityAction1 {
+        CreateTextStack "Do you like me?"
+        SpawnTextboxEx "Yes#No", "choice", 90, 85, 10, 10
+        If _LastResult == 0 {
+            CreateTextStack "Thank you!"
+        }
+        Else {
+            CreateTextStack "Fuck you."
+        }
+    }</pre>
+    
+<p>As long as I don't make anyone write the scripts for me, the deep details of the scripting engine and the list of commands shall remain a mystery.</p>
+
+<a name='viewport'></a>
+<h2>Viewport</h2>
+
+<p>The game will be running at a fixed resolution of 640x480. Any resolution changes in the settings and/or the fullscreen mode will just scale the original 640x480 image. As long as I don't find a way to fill the extra space after increasing the resolution (especially in battles), I just don't have any other choice.</p>
+
+<center>
+<a href='f4.png'><img src='f4.png' style='width:320px'></a><br>
+<i>(a sample screenshot in full resolution - click for the full image)</i>
+</center>
+
+<p>With current game resolution, it's good to assume that from any given position the player can see 500 pixels in either direction (250 pixels on the map, since the map is scaled 2 times when rendering it to the screen).</p>
+
+<a name='other'></a>
+<h2>Other details</h2>
+
+<a name='battlesprites'></a>
+<h3>Sprites in battle</h3>
+
+<p>In-battle sprites have no particular dimension requirements, but try to keep the height under 160 pixels. The sprites should not be animated - any attack animations will be generated dynamically. Generally the sprite should just show the enemy standing in front of the player, but that's not a requirement.</p>
+
+<center>
+<a href='f6.png'><img src='f6.png' style='width:320px'></a><br>
+<i>(OH IT'S A PUMBLOOM! - click for the full image)</i>
+</center>
+
+<a name='psi'></a>
+<h3>PSI animations</h3>
+
+<p>Just animated GIFs. If the move affects all enemies, the image will be scaled a round amount of times to the point where it is at least 640 pixels wide and 480 pixels high (in order to fill the entire screen). If the move affects one enemy, the image will be just displayed on the affected enemy's sprite. Don't try to make animations with bigger frames than 320x240, to keep the file sizes sane (the game is full of pixel art anyway - even scaling an animation 3 times won't look bad). The frame durations in the GIF file do not matter, the animation will be always displayed at a constant 30 fps rate. <a href='psi_rockin.gif'>Click here to see an example animation of Ness trying PSI Rockin α (110 KB)</a>.</p>
+
+<p>If you want to try and make a PSI animation, try to keep it in the EarthBound style, so it doesn't look weird among the original ones. In case you haven't played EarthBound - <a href='https://www.youtube.com/watch?v=PJ42Afr_F3E'>here's an excellent video with every PSI animation on a black background</a>.
+
+<a name='textcommands'></a>
+<h3>Text commands</h3>
+
+<p>The in-game text can contain text commands - special character sequences that have other effects than printing out text. This reference is kept just in case I find someone to help me with scripting.</p>
+
+<pre>\??? - play sound with ID ??? (like \026 - play sound 26)
+\x?? - display character with hex code ??
+   | - pause text for 20 frames (0.33 seconds)
+   @ - erase all text already displayed
+   # - start a new line, expand the textbox if necessary
+   ` - wait for a key/button press
+   { - disable text scrolling sound
+   } - enable text scrolling sound</pre>
+   
+<p>Certain text-related commands are also supported:</p>
+
+<pre>%(team0), %(team1), %(team2), %(team3) - print names of first, second, third, fourth character in team
+%(arin),  %(danny), %(jon),   %(ross)  - print Grump names (the game will allow giving custom names to the Grumps)
+
+%(buf) - print contents of the text buffer (freely manipulable with script commands)</pre>
+
