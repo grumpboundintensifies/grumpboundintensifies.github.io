@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<style>
+body {
+    font-family: verdana, sans-serif;
+}
+body,table { margin:0;padding:0; }
+.decrypt-window {
+    background:#eee;text-align:center;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:15px 0 15px 0;font-size:12px;
+}
+.decrypt-window input {
+    text-align: center;
+}
+#wrongpasswd {
+    color: red;
+}
+</style>
+<script src='aes.js'></script>
+<script src='aes-ctr.js'></script>
+<script src='encrypt.js'></script>
+<div style='position:absolute;left:10px;top:-1px;z-index:100000;border:1px solid #ccc;background: #fee;font-size:12px;padding:5px'><a href='javascript:void(0)' onclick='forgetKey()'>Log out</a></div>
+
+<center><noscript>You must enable JavaScript to see this page.</noscript></center>
+
+<textarea style='display:none' id='data'>ogEdmfV/rlVgSmYrF/Udek9rbKvPoqBdUpP+zP2CgX3QK+ZSVRVo4qNoUrrGaIECuEug7Q/T3OQveQEkfzlT6XlIXKf4V9wgqvG4OcUURzLHZYUYxyqCgyTxQT2taZgqeWQsW2BwEzfxJcf1SVVC7R6f8GMAn0B0MEJ0Mtui6GdfLQpldgTOyud+q0zZyAoUl/woQ0OOc5JWQoOxAmZ1tZ5qSWCtXsZYyYKJn0/xSBIjVwkUAlLBxli6Cp6CigA+e0cjTOH5e+3HS+gZA1X/S7xcGeAofMCBlER0SkrlEwbA5uxdO/KrGskaizFsxhT0RVp0cQ==</textarea>
