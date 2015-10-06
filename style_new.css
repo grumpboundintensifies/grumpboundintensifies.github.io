@@ -1,0 +1,154 @@
+body, html {
+    padding: 0;
+    margin: 0;
+    background: black;
+    color: white;
+    min-width: 800px;
+}
+
+#subtext {
+    background: #240048;
+    height: 60px;
+    line-height: 58px;
+    text-align: center;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+#flavor {
+    height: 380px;
+    border-bottom: 2px solid #330066;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    background: #240048 url('images/nova.jpg') center;
+}
+#flavor h2 {
+    font-size: 20px;
+    font-family: 'Lato', sans-serif;
+    margin:10px 0 10px 0;
+}
+#flavor h1 {
+    font-size: 35px;
+    margin:280px 0 20px 0;
+}
+#headlogo {
+    height: 100%;
+}
+#sect1 {
+    text-align: center;
+    background: #382e3d url('images/sectbacks.png');
+    border-bottom: 2px solid #220044;
+    border-top: 2px solid #330066;
+    padding-top: 10px;
+}
+#sect1 .pointctr {
+    width: 90%;
+    margin:0 auto 10px auto;
+}
+#sect1 .point {
+    padding: 20px;
+    width: 33%;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    margin:0;
+    vertical-align: top;
+}
+#sect1 .ic {
+    display: block;
+    margin: 0 auto 20px auto;
+    height: 40px;
+}
+#sect2 .ic, #sect3 .ic {
+    display: block;
+    margin: 0 auto 10px auto;
+    height: 40px;
+}
+.sepr {
+    border-right: 1px dashed #666;
+}
+.sepl {
+    border-left: 1px dashed #666;
+}
+
+a {
+    color:#aaaaff;
+}
+a:hover {
+    color:white;
+}
+
+#sect2 {
+    text-align: center;
+    background: #382e3d url('images/sectbacks2.png');
+    border-bottom: 2px solid #220044;
+    border-top: 2px solid #330066;
+    padding-top: 25px;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+#sect3 {
+    text-align: center;
+    background: #382e3d url('images/sectbacks.png');
+    border-bottom: 2px solid #220044;
+    border-top: 2px solid #330066;
+    padding-top: 25px;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+}
+#sect3 .ics {
+    height: 64px;
+    margin-bottom: 10px;
+}
+
+#foot {
+    padding: 15px;
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+@keyframes a1 {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes a2 {
+    0%   { opacity: 0; }
+    50%  { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.animated {
+}
+#subtext_text {
+    animation-name: a1;
+    animation-duration: 1s;
+}
+.point {
+    animation-name: a2;
+}
+.anim1 { animation-duration: 0.8s; }
+.anim2 { animation-duration: 1.0s; }
+.anim3 { animation-duration: 1.2s; }
+
+.icimg {
+    display: inline-block;
+    margin: 5px;
+    box-shadow: 0px 0px 5px 1px black;
+    border: 1px solid black;
+}
+
+.iccont {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+.hs {
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px 1px black;
+}
+.hs a { display: none !important; }

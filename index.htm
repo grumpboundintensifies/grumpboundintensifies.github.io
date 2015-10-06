@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <meta charset='utf-8'>
 
-<link href='http://fonts.googleapis.com/css?family=Signika+Negative:300|Press+Start+2P' rel='stylesheet' type='text/css'>
-<link rel='stylesheet' href='style.css' type='text/css'>
-<!--[if !IE]> -->
-    <link rel='stylesheet' media='screen and (max-width: 800px)' href='style_small.css'>
-<!-- <![endif]-->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700|Lato:400,700' rel='stylesheet' type='text/css'>
+<link rel='stylesheet' href='style_new.css' type='text/css'>
 
 <title>GrumpBound - World's Grumpiest RPG</title>
-<meta name="viewport" content="width=device-width; maximum-scale=1; minimum-scale=1;">
+<meta name="viewport" content="width=800, initial-scale=0.001">
 <meta name='robots' content='all'>
 <meta name='generator' content='a GG fan that also happened to be a programmer with too much free time'>
 <meta name='description' content="A game a lot like EarthBound, but with Game Grumps. Grump-themed RPG based off EarthBound, where the chosen four - Arin, Dan, Jon and Ross save the world from Giygas.">
 
 <script type='text/javascript' src='nothing-to-see-here.js'></script>
+<script type='text/javascript' src='highslide/highslide.packed.js'></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -25,29 +23,43 @@
 
 </script>
 
-<div id='header'>
-    <a href='/'><img src='images/logo.png' alt='GrumpBound'></a>
+<div id='flavor'>
+<img id='headlogo' src='images/logo.png' alt='GrumpBound'>
 </div>
-<div id='header_sep'></div>
-<div id='subheader'>
-    World's Grumpiest RPG
+<div id='subtext'><span id='subtext_text' class='animated'>Jon and Arin win. They realize the power of PK Friendship.</span></div>
+<!-- 'Why not use flexbox', you might ask?
+     Because IE. That's why. -->
+<div id='sect1'><table class='pointctr'><tr>
+    <td class='point sepr anim1 animated'><img src='images/1.png' class='ic'>Earthbound was a great game. Game Grumps are great people. So how about we take those two things and merge them together? And so begins <b>GrumpBound, a game for Windows, Linux and Mac</b>. Grump-themed RPG based off Earthbound, where <b>the chosen four - Arin, Dan, Jon and Ross - embark on an adventure to save the world</b>.</td>
+    <td class='point anim2 animated'><img src='images/2.png' class='ic'>This game is a present for all the lovelies out there. It's made by the community and for the community. <b>The game will be entirely free to play. It is not a romhack, so you don't have to own a copy of Earthbound before playing.</b> It's made with love with a custom engine - this is not your typical RPG&nbsp;Maker fangame. We are really trying.</td>
+    <td class='point sepl anim3 animated'><img src='images/3.png' class='ic'>The project is still under heavy development. <b>Expect a playable demo soon. In the meantime, you can follow us on social media to get notified about any updates.</b> It all depends on you and your support. Help the game happen by sharing it with any lovelies you know. You can also <a href='joblist.htm'>join our team</a> if you want to support us directly.</td>
+</tr></table></div>
+<div id='sect2'>
+    <img src='images/4.png' alt='Screenshot gallery' class='ic'><b>Screenshot gallery</b>
+    <br><br>
+    <div class='iccont'>
+        <a href='screenshot/1.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/1-min.png' class='icimg'></a>
+        <a href='screenshot/2.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/2-min.png' class='icimg'></a>
+        <a href='screenshot/3.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/3-min.png' class='icimg'></a>
+    </div>
+    <div class='iccont'>
+        <a href='screenshot/4.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/4-min.png' class='icimg'></a>
+        <a href='screenshot/5.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/5-min.png' class='icimg'></a>
+        <a href='screenshot/6.png' onclick="return hs.expand(this,{wrapperClassName:'hs'})"><img src='screenshot/6-min.png' class='icimg'></a>
+    </div><br>
+    <br>
+</div>
+<div id='sect3'>
+    <a href='http://facebook.com/grumpboundintensifies'><img src='images/Facebook.png' class='ics'></a>
+    <a href='http://www.youtube.com/channel/UCc9M3M6p9KqYGQe6yN37TsQ'><img src='images/YouTube.png' class='ics'></a>
+    <!--<a href='http://twitter.com/grumpbound'><img src='images/Twitter.png' class='ics'></a>-->
+    <!--<br>(visit YouTube to find actual gameplay footage!)<br>&nbsp;-->
 </div>
 
-<div id='intro'>
-    <div class='bullet odd concept1'>
-        <div class='bcontent'><h2>What is that?</h2>Have you ever played EarthBound? It was one of the best RPG games of its time. You watch Game Grumps? Well, if you didn't, you probably wouldn't be here. So how about we take those two things and merge them together? And so begins <b>GrumpBound</b> - a Grump-themed RPG based off EarthBound, where the chosen four - Arin, Dan, Jon and Ross save the world from Giygas, the universal cosmic destroyer.</div>
-    </div>
-    <div class='bullet continue even concept2'>
-        <div class='bcontent'><h2>Stay updated</h2>As much as we try, the game is not yet ready for release. It is in early alpha stage, <a href='http://youtube.com/watch?v=3sYO6dRgiUA'>this is what we've done so far</a>, and the first playable demo is expected to be released within a few months. Follow this project's official sites on social media to stay constantly updated about any progress made on the game. Any future updates and information will be posted on our <a href='http://facebook.com/grumpboundintensifies'>Facebook page</a>, as well as this website right here.</div>
-    </div>
-    <div class='bullet continue odd concept3'>
-        <div class='bcontent'><h2>Support</h2>GrumpBound <b>will be free to play</b>. But here's a list of things that aren't free - food! Whether the game will ever be finished, or whether or not will it be a fun experience, it all depends on your support. Everyone can do something to help us. Share the information about this project to all lovelies you know. Leave a positive comment to motivate us. After the project reaches its beta stage, we might start accepting donations.</div>
-    </div>
-    <div class='bullet continue even concept4'>
-        <div class='bcontent'><h2>We need you!</h2>If you have any assets that would help us make this game happen, please join the team! Are you good at writing or level design? Or perhaps you'd like to work on the concept art? Any spriters, graphics designers, composers? Whatever you do, your work will surely help advance the project. As a member, you will have access to early game versions and your efforts will be mentioned in the credits. <a href='joblist.htm'>Visit the joblist</a> for more information.</div>
-    </div>
-</div>
 
-<div id='footer'>
-    TheZZAZZGlitch 2015. You all didn't expect me to be a lovely, right?
+<div id='foot' style='max-height:99999px'>
+    GrumpBound was created by <a href='http://youtube.com/user/TheZZAZZGlitch'>TheZZAZZGlitch</a> - a Game Grumps fan that also happened to be a programmer with too much free time.<br>
+    Icons made by <a href="http://www.flaticon.com/authors/daniel-bruce" title="Daniel Bruce">Daniel Bruce</a>, <a href="http://www.flaticon.com/authors/sarfraz-shoukat" title="Sarfraz Shoukat">Sarfraz Shoukat</a>, <a href="http://www.flaticon.com/authors/sergiu-bagrin" title="Sergiu Bagrin">Sergiu Bagrin</a>, <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" rel="nofollow">flaticon.com</a>. Licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>.
+<br>
+    GrumpBound is an unofficial fanmade game, and is not officially associated with Nintendo Co. Ltd. or EarthBound/Mother. All rights are reserved to their respective owners.
 </div>
